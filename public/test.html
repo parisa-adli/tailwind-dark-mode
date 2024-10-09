@@ -1,0 +1,46 @@
+<!DOCTYPE html>  
+<html lang="fa">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>مثال کلیک</title>  
+    <style>  
+        .parent {  
+            padding: 20px;  
+            background-color: lightblue;  
+        }  
+        .child {  
+            padding: 10px;  
+            background-color: lightcoral;  
+            margin-top: 10px;  
+        }  
+    </style>  
+</head>  
+<body>  
+
+<div class="parent" id="parent">  
+    روی من کلیک کن  
+    <div class="child" id="child">من بچه‌ام</div>  
+    <div class="child" id="child2">من بچه‌ی دیگرم</div>  
+</div>  
+
+<script>  
+    document.getElementById('parent').addEventListener('click', function(event) {  
+        alert('والد کلیک شد');  
+        // جلوگیری از انتشار رویداد به بچه‌ها  
+        event.stopPropagation();  
+    });  
+
+    // اینجا رویداد روی بچه‌ها را اضافه می‌کنیم  
+    document.querySelectorAll('.child').forEach(child => {  
+        child.addEventListener('click', function(event) {  
+            alert('بچه کلیک شد');  
+            // اگر بخواهیم انتشار رویداد در اینجا نیز جلوگیری شود:  
+            // event.stopPropagation();  
+        });  
+    });  
+</script>  
+
+</body>  
+</html>event.preventDefault(); // این خط برای جلوگیری از هرگونه عمل خاص در بچه‌ها
+event.stopImmediatePropagation(); // این خط برای جلوگیری از انتشار رویداد
